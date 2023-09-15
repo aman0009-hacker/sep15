@@ -515,7 +515,7 @@ class OrderController extends AdminController
      *
      * @return Form
      */
-    protected function form()
+    protected function form()   
     {
         $form = new Form(new Order());
         // $form->decimal('amount', __('Amount'));

@@ -31,6 +31,7 @@ Route::group([
     $router->resource('records', YardSupervisorManagementController::class);
     $router->resource('admin-common-value-changes', AdminCommonValue::class);
 
+    $router->resource('admin-users', UserRoleController::class);
 
 
 });
