@@ -3,6 +3,8 @@
 namespace App\Admin\Controllers;
 
 use App\Models\AdminUser;
+use App\Models\permission;
+use App\Models\Role;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -35,8 +37,12 @@ class UserRoleController extends AdminController
             }
             else
             {
+                foreach ($value as $key => $singlevalue) {
+            
+                          $arr[]=$singlevalue['name'];
+                }
 
-                return $value[0]['name'];
+                return implode(" ",$arr);
             }
         });
         $grid->column('name', __('Name'));
@@ -93,12 +99,33 @@ class UserRoleController extends AdminController
         $form = new Form(new AdminUser());
 
         $form->text('username', __('Username'));
-        // $form->password('password', __('Password'));
+        $form->password('password', __('Password'))->creationRules('required|min:6')->updateRules('nullable|min:6');;
         $form->text('name', __('Name'));
         $form->email('email', __('Email'));
-        // $form->image('avatar', __('Avatar'));
+        $form->image('avatar', __('Avatar'));
+        // $form->select('Roles',__('Roles'))->options(Role::all()->pluck('name'));
+        $form->multipleSelect('roles', __('Role'))->options(Role::all()->pluck('name', 'id'));
+       
+       
+        $form->select('permission_id','permissions')->options(permission::all()->pluck('name','id')); 
         // $form->text('remember_token', __('Remember token'));
-
+        $form->saving(function (Form $form) {
+            if ($form->password) {
+                // Hash the password before saving
+                $form->password = bcrypt($form->password);
+            }
+        });
         return $form;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
