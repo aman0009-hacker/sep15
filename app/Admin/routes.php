@@ -32,7 +32,9 @@ Route::group([
     $router->resource('admin-common-value-changes', AdminCommonValue::class);
 
     // $router->resource('admin-users', UserRoleController::class);
-    $router->resource('admin-users', authController::class);
+    // $router->resource('admin-users', authController::class);
+
+    $router->resource('admin-users', adminAuthController::class);
 
 
 });

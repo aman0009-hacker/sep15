@@ -78,4 +78,8 @@ let year=data.getFullYear();
 let hour=data.getHours();
 let minute=String(data.getMinutes()).padStart(2,"0");
 let today=year+"-"+month+"-"+day;
-$('#Chequedate').attr('min',today);        
+$('#Chequedate').attr('min',today);       
+
+
+
+
